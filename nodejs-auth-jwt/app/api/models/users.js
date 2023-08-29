@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 10; 
 
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
@@ -12,13 +12,17 @@ const UserSchema = new Schema({
  email: {
   type: String,
   trim: true,
-  required: true
+  required: true 
  },
  password: {
   type: String,
-  trim: true,
+  trim: true, 
   required: true
- }
+ },
+ image:{
+     data: Buffer, // Use Buffer type for storing binary data
+     contentType: String // Store the content type of the image
+ },
 });
 // hash user password before saving into database
 UserSchema.pre('save', function(next){

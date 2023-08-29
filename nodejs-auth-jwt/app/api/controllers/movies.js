@@ -1,7 +1,7 @@
 const movieModel = require('../models/movies'); // Import your movie model
 
 const getById = async (req, res, next) => {
-  try {
+  try { 
     const movieInfo = await movieModel.findById(req.params.movieId);
     res.json({ status: "success", message: "Movie found!!!", data: { movies: movieInfo } });
   } catch (error) {
@@ -23,12 +23,17 @@ const getAll = async (req, res) => {
 
 const updateById = async (req, res, next) => {
   try {
-    await movieModel.findByIdAndUpdate(req.params.movieId, { name: req.body.name });
+    console.log("Movie Update in server", req);
+    
+    await movieModel.findByIdAndUpdate(req.params.movieId, {
+      movieName: req.body.movieName,
+      releaseDate: req.body.releaseDate
+    });
     res.json({ status: "success", message: "Movie updated successfully!!!", data: null });
   } catch (error) {
     next(error);
   }
-};
+}; 
 
 const deleteById = async (req, res, next) => {
   try {
